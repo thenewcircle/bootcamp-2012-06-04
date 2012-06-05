@@ -15,7 +15,7 @@ or
 
 	git clone http://github.com/marakana/bootcamp-2012-06-04.git
 
-or download a Zip archive by clicking the link above.
+or download a Zip archive by clicking the link at the top of the page.
 
 == Useful Links
 
