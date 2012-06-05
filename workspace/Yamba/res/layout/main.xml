@@ -2,24 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" android:padding="@dimen/view_spacing">
+    android:orientation="vertical"
+    android:padding="@dimen/view_spacing">
 
     <TextView
-        android:layout_width="fill_parent"
+        style="@style/activity_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello" android:layout_marginBottom="@dimen/view_spacing"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/view_spacing"
+        android:text="@string/activity_main_title"/>
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/edit_status"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:ems="10"
-        android:inputType="textMultiLine" android:layout_weight="1"/>
+        android:hint="@string/edit_status_hint"
+        android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"/>
+        android:text="@string/button_update_text" />
 
 </LinearLayout>
