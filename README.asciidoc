@@ -19,9 +19,11 @@ or download a Zip archive by clicking the link at the top of the page.
 
 == Useful Links
 
+Extended version of Android support package that includes backport of ActionBar: http://actionbarsherlock.com/
+
 Android blogs that Ken follows in http://marakana.com/external/slasscom/android-blogs.opml[OPML format]
 
-_Professional Android 2 Application Development_, by Reto Meier: http://www.wrox.com/WileyCDA/WroxTitle/Professional-Android-Application-Development.productCd-0470565527.html
+_Professional Android 4 Application Development_, by Reto Meier: http://www.wrox.com/WileyCDA/WroxTitle/Professional-Android-4-Application-Development.productCd-1118102274.html
 
 Generating app icons: http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html[Android Asset Studio]
 
