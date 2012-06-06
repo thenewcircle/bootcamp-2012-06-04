@@ -13,19 +13,13 @@
         android:layout_marginBottom="@dimen/view_spacing"
         android:text="@string/activity_main_title"/>
 
-    <EditText
-        android:id="@+id/edit_status"
+    <fragment
+        android:id="@+id/compose_fragment"
+        android:name="com.marakana.android.yamba.ComposeFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="@string/edit_status_hint"
-        android:inputType="textMultiLine" />
+        android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_update_text" />
+        <!-- Preview: layout=@layout/compose_fragment -->
+    </fragment>
 
 </LinearLayout>
