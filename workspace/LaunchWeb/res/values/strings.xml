@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, LaunchActivity!</string>
+    <string name="app_name">Launch Web</string>
+    <string name="toast_activity_not_found">Unable to find activity to display content</string>
+</resources>
