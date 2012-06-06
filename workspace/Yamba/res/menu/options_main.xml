@@ -5,7 +5,7 @@
         android:id="@+id/menu_preferences"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/menu_preferences_title"
-        android:titleCondensed="@string/menu_preferences_title_cond">
+        android:titleCondensed="@string/menu_preferences_title_cond" android:showAsAction="ifRoom|withText">
     </item>
 
 </menu>
