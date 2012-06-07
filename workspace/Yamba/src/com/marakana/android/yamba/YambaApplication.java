@@ -4,6 +4,7 @@ import winterwell.jtwitter.Twitter;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
 public class YambaApplication extends Application implements OnSharedPreferenceChangeListener {
@@ -14,6 +15,8 @@ public class YambaApplication extends Application implements OnSharedPreferenceC
 	private String mPrefUserKey;
 	private String mPrefPasswordKey;
 	private String mPrefSiteUrlKey;
+	
+	private TimelineHelper mTimelineHelper;
 
 	@Override
 	public void onCreate() {
@@ -26,10 +29,16 @@ public class YambaApplication extends Application implements OnSharedPreferenceC
 		mPrefUserKey = getString(R.string.pref_user_key);
 		mPrefPasswordKey = getString(R.string.pref_password_key);
 		mPrefSiteUrlKey = getString(R.string.pref_site_url_key);
+		
+		mTimelineHelper = new TimelineHelper(this);
 	}
 
 	public static YambaApplication getInstance() {
 		return sApp;
+	}
+	
+	public SQLiteDatabase getDb() {
+		return mTimelineHelper.getWritableDatabase();
 	}
 	
 	public synchronized Twitter getTwitter() {
