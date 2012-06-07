@@ -23,6 +23,8 @@ Extended version of Android support package that includes backport of ActionBar:
 
 Zxing barcode scanner: http://code.google.com/p/zxing/
 
+Encrypted SQLite databases: http://sqlcipher.net/
+
 Android blogs that Ken follows in http://marakana.com/external/slasscom/android-blogs.opml[OPML format]
 
 _Professional Android 4 Application Development_, by Reto Meier: http://www.wrox.com/WileyCDA/WroxTitle/Professional-Android-4-Application-Development.productCd-1118102274.html
