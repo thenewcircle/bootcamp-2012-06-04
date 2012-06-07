@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="PrefsActivity"></activity>
+        <service android:name="UpdaterService"></service>
     </application>
 
 </manifest>
