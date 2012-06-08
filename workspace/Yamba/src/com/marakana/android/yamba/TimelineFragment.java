@@ -1,16 +1,20 @@
 package com.marakana.android.yamba;
 
-import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 
-public class TimelineFragment extends ListFragment implements ViewBinder {
+public class TimelineFragment extends ListFragment
+		implements ViewBinder, LoaderCallbacks<Cursor> {
 	private static final String[] FROM = {
 		StatusContract.Columns.USER,
 		StatusContract.Columns.MESSAGE,
@@ -22,30 +26,21 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 		R.id.status_date
 	};
 	
+	private static final int TIMELINE_LOADER = 1;
+	private LoaderManager mLoaderManager;
 	private SimpleCursorAdapter mAdapter;
-	private Cursor mCursor;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		ContentResolver cr = getActivity().getContentResolver();
-		
-		/*
-		 * 	Perform the initial query of the status content provider.
-		 * 	We're querying the cursor on the main thread -- a bad practice.
-		 * 	We'll fix this later by using a Loader. Prior to the introduction of
-		 * 	Loaders, the proper technique was to generate a Cursor in a worker
-		 * 	thread, such as in an AsyncTask, and when the Cursor was ready,
-		 * 	do a SimpleCursorAdapter.changeCursor() call to install the new Cursor.
- 		 */
-		
-		mCursor = cr.query(StatusContract.CONTENT_URI, null, null, null, null);
+		mLoaderManager = getLoaderManager();
+		mLoaderManager.initLoader(TIMELINE_LOADER, null, this);
 		
 		// Create the adapter and install the ViewBinder.
 		mAdapter = new SimpleCursorAdapter(getActivity(),
 										   R.layout.timeline_row,
-										   mCursor, FROM, TO, 0);
+										   null, FROM, TO, 0);
 		mAdapter.setViewBinder(this);
 		setListAdapter(mAdapter);
 	}
@@ -53,23 +48,7 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 	@Override
 	public void onStart() {
 		super.onStart();
-		
-		// We're being naughty and re-querying the cursor on the main thread.
-		// We'll fix this later by using a Loader.
-		mCursor.requery();
-		mAdapter.notifyDataSetChanged();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		mCursor.deactivate();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		mCursor.close();
+		mLoaderManager.restartLoader(TIMELINE_LOADER, null, this);
 	}
 
 	@Override
@@ -86,6 +65,22 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 		default:
 			return false;
 		}
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int loaderId, Bundle args) {
+		return new CursorLoader(getActivity().getApplicationContext(),
+						 StatusContract.CONTENT_URI, null, null, null, null);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		mAdapter.swapCursor(cursor);
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		mAdapter.swapCursor(null);
 	}
 
 }
