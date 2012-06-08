@@ -30,9 +30,21 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 		super.onActivityCreated(savedInstanceState);
 		
 		SQLiteDatabase db = YambaApplication.getInstance().getDb();
+		
+		/*
+		 * 	Perform the initial query of the timeline database.
+		 * 	We're querying the cursor on the main thread -- a bad practice.
+		 * 	We'll fix this later by using a Loader. Prior to the introduction of
+		 * 	Loaders, the proper technique was to generate a Cursor in a worker
+		 * 	thread, such as in an AsyncTask, and when the Cursor was ready,
+		 * 	do a SimpleCursorAdapter.changeCursor() call to install the new Cursor.
+ 		 */
+		
 		mCursor = db.query(TimelineHelper.TABLE,
 						   null, null, null, null, null,
 						   TimelineHelper.COLUMN_CREATED_AT + " desc");
+		
+		// Create the adapter and install the ViewBinder.
 		mAdapter = new SimpleCursorAdapter(getActivity(),
 										   R.layout.timeline_row,
 										   mCursor, FROM, TO, 0);
@@ -43,6 +55,9 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 	@Override
 	public void onStart() {
 		super.onStart();
+		
+		// We're being naughty and re-querying the cursor on the main thread.
+		// We'll fix this later by using a Loader.
 		mCursor.requery();
 		mAdapter.notifyDataSetChanged();
 	}

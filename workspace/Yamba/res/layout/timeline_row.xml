@@ -30,6 +30,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/status_user"
         android:text="Message body goes here"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" android:autoLink="all"/>
 
 </RelativeLayout>

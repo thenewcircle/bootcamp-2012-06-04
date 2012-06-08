@@ -8,5 +8,7 @@
         android:titleCondensed="@string/menu_preferences_title_cond" android:showAsAction="ifRoom|withText">
     </item>
     <item android:id="@+id/menu_refresh" android:showAsAction="ifRoom|withText" android:icon="@drawable/menu_refresh" android:titleCondensed="@string/menu_refresh_title_cond" android:title="@string/menu_refresh_title"></item>
+    <item android:id="@+id/menu_compose" android:title="@string/menu_compose_title" android:titleCondensed="@string/menu_compose_title_cond" android:showAsAction="ifRoom|withText" android:icon="@drawable/menu_status_update"></item>
+    <item android:id="@+id/menu_timeline" android:title="@string/menu_timeline_title" android:titleCondensed="@string/menu_timeline_title_cond" android:icon="@drawable/menu_timeline" android:showAsAction="ifRoom|withText"></item>
 
 </menu>
