@@ -6,9 +6,9 @@ import java.util.List;
 import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 import android.app.IntentService;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
@@ -25,7 +25,7 @@ public class UpdaterService extends IntentService {
 		try {
 			List<Twitter.Status> timeline = YambaApplication.getInstance().getTwitter().getHomeTimeline();
 			
-			SQLiteDatabase db = YambaApplication.getInstance().getDb();
+			ContentResolver cr = getContentResolver();
 			ContentValues values = new ContentValues();
 			
 			for (Twitter.Status status: timeline) {
@@ -36,13 +36,13 @@ public class UpdaterService extends IntentService {
 				Log.v(TAG, id + ": " + name + " posted at " + createdAt + ": " + msg);
 				
 				values.clear();
-				values.put(TimelineHelper.COLUMN_ID, id);
-				values.put(TimelineHelper.COLUMN_USER, name);
-				values.put(TimelineHelper.COLUMN_MESSAGE, msg);
-				values.put(TimelineHelper.COLUMN_CREATED_AT, createdAt.getTime());
+				values.put(StatusContract.Columns._ID, id);
+				values.put(StatusContract.Columns.USER, name);
+				values.put(StatusContract.Columns.MESSAGE, msg);
+				values.put(StatusContract.Columns.CREATED_AT, createdAt.getTime());
 				
-				// Insert the status in the timeline database
-				db.insert(TimelineHelper.TABLE, null, values);
+				// Insert the status in the StatusProvider
+				cr.insert(StatusContract.CONTENT_URI, values);
 			}
 		} catch (TwitterException e) {
 			Log.w(TAG, "Failed to fetch timeline");

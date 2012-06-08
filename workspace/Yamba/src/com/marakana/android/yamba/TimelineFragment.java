@@ -1,7 +1,7 @@
 package com.marakana.android.yamba;
 
+import android.content.ContentResolver;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 public class TimelineFragment extends ListFragment implements ViewBinder {
 	private static final String[] FROM = {
-		TimelineHelper.COLUMN_USER,
-		TimelineHelper.COLUMN_MESSAGE,
-		TimelineHelper.COLUMN_CREATED_AT
+		StatusContract.Columns.USER,
+		StatusContract.Columns.MESSAGE,
+		StatusContract.Columns.CREATED_AT
 	};
 	private static final int[] TO = {
 		R.id.status_user,
@@ -29,10 +29,10 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		SQLiteDatabase db = YambaApplication.getInstance().getDb();
+		ContentResolver cr = getActivity().getContentResolver();
 		
 		/*
-		 * 	Perform the initial query of the timeline database.
+		 * 	Perform the initial query of the status content provider.
 		 * 	We're querying the cursor on the main thread -- a bad practice.
 		 * 	We'll fix this later by using a Loader. Prior to the introduction of
 		 * 	Loaders, the proper technique was to generate a Cursor in a worker
@@ -40,9 +40,7 @@ public class TimelineFragment extends ListFragment implements ViewBinder {
 		 * 	do a SimpleCursorAdapter.changeCursor() call to install the new Cursor.
  		 */
 		
-		mCursor = db.query(TimelineHelper.TABLE,
-						   null, null, null, null, null,
-						   TimelineHelper.COLUMN_CREATED_AT + " desc");
+		mCursor = cr.query(StatusContract.CONTENT_URI, null, null, null, null);
 		
 		// Create the adapter and install the ViewBinder.
 		mAdapter = new SimpleCursorAdapter(getActivity(),
