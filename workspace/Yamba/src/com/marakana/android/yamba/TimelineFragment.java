@@ -1,5 +1,9 @@
 package com.marakana.android.yamba;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -29,6 +33,9 @@ public class TimelineFragment extends ListFragment
 	private static final int TIMELINE_LOADER = 1;
 	private LoaderManager mLoaderManager;
 	private SimpleCursorAdapter mAdapter;
+	
+	private TimelineReceiver mReceiver;
+	private IntentFilter mFilter;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -43,12 +50,22 @@ public class TimelineFragment extends ListFragment
 										   null, FROM, TO, 0);
 		mAdapter.setViewBinder(this);
 		setListAdapter(mAdapter);
+		
+		mReceiver = new TimelineReceiver();
+		mFilter = new IntentFilter(YambaApplication.ACTION_NEW_STATUS);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
 		mLoaderManager.restartLoader(TIMELINE_LOADER, null, this);
+		getActivity().registerReceiver(mReceiver, mFilter, YambaApplication.PERM_RECEIVE_NEW_STATUS, null);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		getActivity().unregisterReceiver(mReceiver);
 	}
 
 	@Override
@@ -81,6 +98,16 @@ public class TimelineFragment extends ListFragment
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		mAdapter.swapCursor(null);
+	}
+	
+	private class TimelineReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// There are new status messages in the database/content provider.
+			mLoaderManager.restartLoader(TIMELINE_LOADER, null, TimelineFragment.this);
+		}
+		
 	}
 
 }

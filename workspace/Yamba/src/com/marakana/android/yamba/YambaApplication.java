@@ -7,6 +7,10 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
 public class YambaApplication extends Application implements OnSharedPreferenceChangeListener {
+	public static final String ACTION_NEW_STATUS = "com.marakana.android.yamba.ACTION_NEW_STATUS";
+	public static final String EXTRA_NEW_STATUS_COUNT = "EXTRA_NEW_STATUS_COUNT";
+	public static final String PERM_RECEIVE_NEW_STATUS = "com.marakana.android.yamba.permission.NEW_STATUS";
+	
 	private static YambaApplication sApp;
 	private Twitter mTwitter;
 	
