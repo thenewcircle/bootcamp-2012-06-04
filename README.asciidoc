@@ -33,3 +33,36 @@ Generating app icons: http://android-ui-utils.googlecode.com/hg/asset-studio/dis
 
 Encrypting preference items: http://stackoverflow.com/questions/5858790/process-the-value-of-preference-before-save-in-android
 
+== Screencasts
+
+You can download the screencasts for the class using the following links:
+
+.Day 1
+* http://marakana.com/external/video/2012-06-04-bootcamp/day1-part-1.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day1-part-2.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day1-part-3.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day1-part-4.mov
+
+.Day 2
+* http://marakana.com/external/video/2012-06-04-bootcamp/day2-part-1.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day2-part-2.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day2-part-3.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day2-part-4.mov
+
+.Day 3
+* http://marakana.com/external/video/2012-06-04-bootcamp/day3-part-1.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day3-part-2.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day3-part-3.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day3-part-4.mov
+
+.Day 4
+* http://marakana.com/external/video/2012-06-04-bootcamp/day4-part-1.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day4-part-2.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day4-part-3.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day4-part-4.mov
+
+.Day 5
+* http://marakana.com/external/video/2012-06-04-bootcamp/day5-part-1.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day5-part-2.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day5-part-3.mov
+* http://marakana.com/external/video/2012-06-04-bootcamp/day5-part-4.mov
